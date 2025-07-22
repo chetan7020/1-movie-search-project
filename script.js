@@ -1,13 +1,13 @@
 import { BASE_URL, API_KEY } from "./config/config.js";
-import { getAllFavorites, saveMovie, removeMovie, isMovieFavorite } from "./storage.js";
+import { StorageService} from "./services/storageService.js"
 import { renderMovies } from "./render.js";
 
 function handleToggleFavorite(movie, btn) {
-    if (isMovieFavorite(movie.imdbID)) {
-        removeMovie(movie.imdbID);
+    if (StorageService.isMovieFavorite(movie.imdbID)) {
+        StorageService.remove(movie.imdbID);
         btn.textContent = "Add to Favorites";
     } else {
-        saveMovie(movie.imdbID, movie);
+        StorageService.save(movie.imdbID, movie);
         btn.textContent = "Remove from Favorites";
     }
 
@@ -15,7 +15,7 @@ function handleToggleFavorite(movie, btn) {
 }
 
 function renderFavorites() {
-    const favMovies = getAllFavorites();
+    const favMovies = StorageService.getAllFavorites();
     renderMovies(favMovies, "favorites", handleToggleFavorite);
 }
 
@@ -33,7 +33,7 @@ async function searchMovies(query) {
         if (data.Response === "True") {
             renderMovies(data.Search, "movieResults", handleToggleFavorite);
         } else {
-            renderMovies([], "movieResults", () => {});
+            renderMovies([], "movieResults", () => { });
         }
 
     } catch (err) {

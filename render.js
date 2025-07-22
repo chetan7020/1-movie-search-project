@@ -1,10 +1,10 @@
-import { saveMovie, removeMovie, isMovieFavorite } from "./storage.js";
+import { StorageService } from "./services/storageService.js";
 
 function createMovieCard(movie, onToggleFavorite) {
     const card = document.createElement("div");
     card.classList.add("movie-card");
 
-    const isFav = isMovieFavorite(movie.imdbID);
+    const isFav = StorageService.isMovieFavorite(movie.imdbID);
     card.innerHTML = `
         <img src="${movie.Poster}">
         <h3>${movie.Title} (${movie.Year})</h3>
