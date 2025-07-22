@@ -1,5 +1,5 @@
 import { BASE_URL, API_KEY } from "./config/config.js";
-import { StorageService} from "./services/storageService.js"
+import { StorageService} from "./services/StorageService.js"
 import { renderMovies } from "./render.js";
 
 function handleToggleFavorite(movie, btn) {

@@ -1,4 +1,4 @@
-import { StorageService } from "./services/storageService.js";
+import { StorageService } from "./services/StorageService.js";
 
 function createMovieCard(movie, onToggleFavorite) {
     const card = document.createElement("div");
